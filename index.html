@@ -102,9 +102,11 @@
 
 <div class="name-row">
   <div class="name"><span contenteditable>ar influencer</span>
-    <svg viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
   <div class="edit-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="2" stroke-linejoin="round"><path d="M4 20h16M6 16l10-10 3 3-10 10H6z"/></svg></div>
 </div>
+
 <div class="handle" contenteditable>@givaldozavale</div>
 
 <div class="stats">
@@ -114,6 +116,7 @@
 </div>
 
 <div class="bio" contenteditable>Escreva aqui a sua biografia</div>
+
 <div class="link">
   <svg viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="2.2" stroke-linecap="round"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>
   <span contenteditable>seu-link-aqui</span>
@@ -138,6 +141,7 @@
 
 <!-- Menu lateral -->
 <div class="overlay" id="overlay"></div>
+
 <div class="drawer">
   <div class="sec">Ativos</div>
 
@@ -147,7 +151,6 @@
     <svg class="ch" viewBox="0 0 24 24" fill="none" stroke="#8a8b91" stroke-width="2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>
   </div>
 
-  <!-- NOVA OPÇÃO: CONTA VERIFICADA -->
   <div class="row" onclick="window.location.href='https://tiktok-work-ashy.vercel.app/'">
     <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="9"/>
@@ -160,29 +163,35 @@
   <div class="sep"></div>
 
   <div class="sec">Ferramentas pessoais</div>
+
   <div class="row">
     <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
     <span class="tx">Centro de atividade</span>
     <svg class="ch" viewBox="0 0 24 24" fill="none" stroke="#8a8b91" stroke-width="2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>
   </div>
+
   <div class="row">
     <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 19a5 5 0 0 1-.6-10A6 6 0 0 1 18 9a4.5 4.5 0 0 1-1 10z"/><path d="M12 10v6M9.5 13.5L12 16l2.5-2.5"/></svg>
     <span class="tx">Vídeos offline</span>
     <svg class="ch" viewBox="0 0 24 24" fill="none" stroke="#8a8b91" stroke-width="2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>
   </div>
+
   <div class="row">
     <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3h-3zM18 18h3v3h-3zM18 14h3M14 18v3" stroke-linecap="round"/></svg>
     <span class="tx">O teu código QR</span>
     <svg class="ch" viewBox="0 0 24 24" fill="none" stroke="#8a8b91" stroke-width="2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>
   </div>
+
   <div class="sep"></div>
 
   <div class="sec">Ferramentas comerciais e de criação</div>
+
   <div class="row">
     <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="7.5" r="4"/><path d="M2 21c0-4 3-7 7-7 1.5 0 2.8.4 3.9 1"/><path d="M18 13l1.2 2.5 2.8.4-2 2 .5 2.8-2.5-1.3-2.5 1.3.5-2.8-2-2 2.8-.4z" fill="#161823" stroke="none"/></svg>
     <span class="tx">TikTok Studio</span>
     <svg class="ch" viewBox="0 0 24 24" fill="none" stroke="#8a8b91" stroke-width="2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>
   </div>
+
   <div class="sep"></div>
 
   <div class="row">
@@ -195,51 +204,237 @@
 <div class="home-bar"></div>
 
 <script>
-  const views=["220","1,028","953","843","571","820","1,200","640","915"];
-  const grid=document.getElementById('grid');
-  const play='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"><path d="M6 4l14 8-14 8z"/></svg>';
+/* =========================================================
+   SISTEMA DE SALVAMENTO AUTOMÁTICO
+   Guarda textos, números, imagens e alterações do perfil.
+   ========================================================= */
 
-  views.forEach(v=>{
-    const c=document.createElement('div');
-    c.className='cell';
-    c.innerHTML=`<div class="hint">+</div><input type="file" accept="image/*"><div class="views">${play}<span contenteditable>${v}</span></div>`;
-    const inp=c.querySelector('input');
+const STORAGE_KEY = "perfil_html_dados_completos_v1";
+let restoringData = false;
 
-    c.addEventListener('click',e=>{
-      if(e.target.closest('.views')) return;
-      inp.click();
+function saveData(){
+  if(restoringData) return;
+
+  const data = {
+    editable: [],
+    backgrounds: {},
+    grid: []
+  };
+
+  document.querySelectorAll("[contenteditable]").forEach((el,index)=>{
+    data.editable.push({
+      index:index,
+      html:el.innerHTML
     });
-
-    inp.addEventListener('change',()=>{
-      const f=inp.files[0];
-      if(!f) return;
-      const r=new FileReader();
-      r.onload=ev=>{
-        c.style.backgroundImage=`url(${ev.target.result})`;
-        c.classList.add('has');
-      };
-      r.readAsDataURL(f);
-    });
-
-    grid.appendChild(c);
   });
 
-  function setBg(input,id){
-    const f=input.files[0];
-    if(!f) return;
-    const r=new FileReader();
-    r.onload=e=>document.getElementById(id).style.backgroundImage=`url(${e.target.result})`;
-    r.readAsDataURL(f);
+  ["miniAv","mainAv"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){
+      data.backgrounds[id]=el.style.backgroundImage || "";
+    }
+  });
+
+  document.querySelectorAll(".cell").forEach((cell,index)=>{
+    data.grid.push({
+      index:index,
+      background:cell.style.backgroundImage || "",
+      has:cell.classList.contains("has")
+    });
+  });
+
+  try{
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
+  }catch(e){
+    console.warn("Não foi possível guardar todos os dados:",e);
+  }
+}
+
+function restoreData(){
+  let raw;
+
+  try{
+    raw=localStorage.getItem(STORAGE_KEY);
+  }catch(e){
+    return;
   }
 
-  document.getElementById('menuBtn').onclick=()=>{
-    document.body.classList.add('open');
+  if(!raw) return;
+
+  try{
+    const data=JSON.parse(raw);
+    restoringData=true;
+
+    const editables=document.querySelectorAll("[contenteditable]");
+
+    if(Array.isArray(data.editable)){
+      data.editable.forEach(item=>{
+        if(editables[item.index]){
+          editables[item.index].innerHTML=item.html;
+        }
+      });
+    }
+
+    if(data.backgrounds){
+      Object.keys(data.backgrounds).forEach(id=>{
+        const el=document.getElementById(id);
+        if(el && data.backgrounds[id]){
+          el.style.backgroundImage=data.backgrounds[id];
+        }
+      });
+    }
+
+    if(Array.isArray(data.grid)){
+      const cells=document.querySelectorAll(".cell");
+
+      data.grid.forEach(item=>{
+        if(cells[item.index]){
+          if(item.background){
+            cells[item.index].style.backgroundImage=item.background;
+          }
+
+          if(item.has){
+            cells[item.index].classList.add("has");
+          }
+        }
+      });
+    }
+
+  }catch(e){
+    console.warn("Dados guardados inválidos.");
+  }finally{
+    restoringData=false;
+  }
+}
+
+
+/* =========================================================
+   CONTEÚDO DA GRELHA
+   ========================================================= */
+
+const views=["220","1,028","953","843","571","820","1,200","640","915"];
+const grid=document.getElementById('grid');
+
+const play='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"><path d="M6 4l14 8-14 8z"/></svg>';
+
+views.forEach(v=>{
+  const c=document.createElement('div');
+  c.className='cell';
+
+  c.innerHTML=`
+    <div class="hint">+</div>
+    <input type="file" accept="image/*">
+    <div class="views">
+      ${play}
+      <span contenteditable>${v}</span>
+    </div>
+  `;
+
+  const inp=c.querySelector('input');
+
+  c.addEventListener('click',e=>{
+    if(e.target.closest('.views')) return;
+    inp.click();
+  });
+
+  inp.addEventListener('change',()=>{
+    const f=inp.files[0];
+
+    if(!f) return;
+
+    const r=new FileReader();
+
+    r.onload=ev=>{
+      c.style.backgroundImage=`url(${ev.target.result})`;
+      c.classList.add('has');
+      saveData();
+    };
+
+    r.readAsDataURL(f);
+  });
+
+  grid.appendChild(c);
+});
+
+
+/* =========================================================
+   IMAGENS DO PERFIL
+   ========================================================= */
+
+function setBg(input,id){
+  const f=input.files[0];
+
+  if(!f) return;
+
+  const r=new FileReader();
+
+  r.onload=e=>{
+    document.getElementById(id).style.backgroundImage=`url(${e.target.result})`;
+
+    if(id==="mainAv"){
+      const letra=document.getElementById('letra');
+      if(letra) letra.style.display='none';
+    }
+
+    saveData();
   };
 
-  document.getElementById('overlay').onclick=()=>{
-    document.body.classList.remove('open');
-  };
+  r.readAsDataURL(f);
+}
+
+
+/* =========================================================
+   SALVAMENTO DOS CAMPOS EDITÁVEIS
+   ========================================================= */
+
+document.addEventListener("input",e=>{
+  if(e.target.matches("[contenteditable]")){
+    saveData();
+  }
+});
+
+document.addEventListener("blur",e=>{
+  if(e.target.matches("[contenteditable]")){
+    saveData();
+  }
+},true);
+
+
+/* =========================================================
+   MENU LATERAL
+   ========================================================= */
+
+document.getElementById('menuBtn').onclick=()=>{
+  document.body.classList.add('open');
+};
+
+document.getElementById('overlay').onclick=()=>{
+  document.body.classList.remove('open');
+};
+
+
+/* =========================================================
+   RESTAURAR DADOS DEPOIS DE CRIAR A GRELHA
+   ========================================================= */
+
+restoreData();
+
+
+/* =========================================================
+   SALVAR ANTES DE SAIR
+   ========================================================= */
+
+window.addEventListener("beforeunload",()=>{
+  saveData();
+});
+
+document.addEventListener("visibilitychange",()=>{
+  if(document.visibilityState==="hidden"){
+    saveData();
+  }
+});
+
 </script>
 
 </body>
- </html>
+   </html>
