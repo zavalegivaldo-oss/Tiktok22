@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Perfil</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  body{background:#fff;font-family:-apple-system,"Roboto","Helvetica Neue",Arial,sans-serif;color:#161823;max-width:480px;margin:0 auto;padding-bottom:70px;overflow-x:hidden}
+  [contenteditable]{outline:none}
+
+  .top{display:flex;justify-content:space-between;align-items:center;padding:14px 14px 0;height:54px}
+  .top .right{display:flex;align-items:center;gap:18px}
+  .top svg{width:28px;height:28px}
+  #menuBtn{cursor:pointer}
+  .mini{position:relative;width:26px;height:26px;border-radius:50%;background:#888 center/cover;cursor:pointer}
+  .mini span{position:absolute;right:-12px;bottom:-4px;font-size:12px;font-weight:700;background:#fff;border-radius:8px;padding:0 2px}
+
+  .avatar-wrap{display:flex;justify-content:center;margin-top:-6px;position:relative}
+  .avatar{width:96px;height:96px;border-radius:50%;background:#e8457a center/cover;display:flex;align-items:center;justify-content:center;color:#fff;font-size:56px;cursor:pointer;position:relative}
+  .plus{position:absolute;bottom:-2px;right:-2px;width:28px;height:28px;border-radius:50%;background:#20d5ec;border:3px solid #fff;display:flex;align-items:center;justify-content:center}
+  .plus svg{width:14px;height:14px}
+  .bubble{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#fff;border-radius:12px;box-shadow:0 1px 6px rgba(0,0,0,.15);padding:4px 8px;font-size:13px;color:#555;text-align:center;line-height:1.25;z-index:2}
+
+  .name-row{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:10px}
+  .name{font-size:17px;font-weight:700;display:flex;align-items:center;gap:2px}
+  .name svg{width:14px;height:14px}
+  .edit-btn{width:48px;height:28px;border-radius:14px;background:#f1f1f2;display:flex;align-items:center;justify-content:center}
+  .edit-btn svg{width:15px;height:15px}
+  .handle{text-align:center;color:#8a8b91;font-size:13px;margin-top:2px}
+
+  .stats{display:flex;justify-content:center;margin-top:16px}
+  .stat{text-align:center;width:96px;position:relative}
+  .stat+.stat::before{content:"";position:absolute;left:0;top:8px;height:16px;width:1px;background:#e3e3e4}
+  .stat b{display:block;font-size:17px;font-weight:700}
+  .stat small{font-size:13px;color:#8a8b91}
+
+  .bio{text-align:center;font-size:14px;margin:12px 20px 0;line-height:1.35}
+  .link{display:flex;justify-content:center;align-items:center;gap:4px;font-size:14px;font-weight:600;margin-top:4px;padding:0 20px;white-space:nowrap;overflow:hidden}
+  .link svg{width:15px;height:15px;flex-shrink:0}
+  .link span{overflow:hidden;text-overflow:ellipsis}
+
+  .tabs{display:flex;margin-top:16px;height:44px;border-bottom:1px solid #eee}
+  .tab{flex:1;display:flex;justify-content:center;align-items:center;position:relative}
+  .tab svg{width:22px;height:22px}
+  .tab.active::after{content:"";position:absolute;bottom:-1px;width:40px;height:2px;background:#161823}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px}
+  .cell{position:relative;aspect-ratio:3/4;background:#f1f1f2 center/cover no-repeat;cursor:pointer;overflow:hidden}
+  .cell .hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#bbb;font-size:28px}
+  .cell.has .hint{display:none}
+  .views{position:absolute;left:6px;bottom:4px;display:flex;align-items:center;gap:3px;color:#fff;font-size:14px;font-weight:600;text-shadow:0 0 3px rgba(0,0,0,.6)}
+  .views svg{width:14px;height:14px;filter:drop-shadow(0 0 2px rgba(0,0,0,.6))}
+  .cell input{display:none}
+
+  .nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;height:62px;background:#fff;border-top:1px solid #eee;display:flex;align-items:center;z-index:10}
+  .nav .it{flex:1;display:flex;flex-direction:column;align-items:center;font-size:10.5px;color:#8a8b91;gap:2px;position:relative}
+  .nav .it svg{width:26px;height:26px}
+  .nav .it.on{color:#161823;font-weight:600}
+  .dot{position:absolute;top:0;right:calc(50% - 16px);width:8px;height:8px;border-radius:50%;background:#fe2c55}
+  .badge{position:absolute;top:-6px;left:calc(50% + 2px);background:#fe2c55;color:#fff;font-size:10px;font-weight:700;border-radius:9px;padding:1px 5px;border:1.5px solid #fff}
+  .create{width:46px;height:30px;position:relative}
+  .create::before,.create::after{content:"";position:absolute;top:0;width:40px;height:30px;border-radius:9px}
+  .create::before{left:0;background:#20d5ec}
+  .create::after{right:0;background:#fe2c55}
+  .create div{position:absolute;left:3px;right:3px;top:0;bottom:0;background:#161823;border-radius:8px;z-index:1;display:flex;align-items:center;justify-content:center}
+  .create svg{width:16px;height:16px}
+  .home-bar{position:fixed;bottom:3px;left:50%;transform:translateX(-50%);width:120px;height:4px;border-radius:2px;background:#bbb;z-index:31}
+
+  /* Menu lateral */
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .25s;z-index:20}
+  .drawer{position:fixed;top:0;bottom:0;right:0;width:85%;max-width:410px;background:#fff;transform:translateX(100%);transition:transform .28s ease;z-index:30;padding:28px 26px 0 26px;overflow-y:auto}
+  body.open .overlay{opacity:1;pointer-events:auto}
+  body.open .drawer{transform:translateX(0)}
+  .sec{font-size:13px;color:#8a8b91;margin:8px 0 4px}
+  .row{display:flex;align-items:center;height:50px;cursor:pointer}
+  .row .ic{width:22px;height:22px;margin-right:18px;flex-shrink:0}
+  .row .tx{flex:1;font-size:16px;font-weight:600;color:#161823}
+  .row .ch{width:16px;height:16px}
+  .sep{height:1px;background:#e8e8e9;margin:8px 0 14px}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-7 7-7s7 3 7 7"/><path d="M19 8v6M16 11h6"/></svg>
+  <div class="right">
+    <label class="mini" id="miniAv"><input type="file" accept="image/*" hidden onchange="setBg(this,'miniAv')"><span contenteditable>99</span></label>
+    <svg viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="1.8" stroke-linejoin="round"><path d="M14 4l8 7.5-8 7.5v-4.5C8 14.5 4.5 16.5 2 20c.5-6 4-10.5 12-11.5z"/></svg>
+    <svg id="menuBtn" viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </div>
+</div>
+
+<div class="avatar-wrap">
+  <label class="avatar" id="mainAv">
+    <input type="file" accept="image/*" hidden onchange="setBg(this,'mainAv');document.getElementById('letra').style.display='none'">
+    <span id="letra" contenteditable>G</span>
+    <div class="plus"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"><path d="M12 4v16M4 12h16"/></svg></div>
+  </label>
+  <div class="bubble" contenteditable>Sussurro,<br>sussurro</div>
+</div>
+
+<div class="name-row">
+  <div class="name"><span contenteditable>ar influencer</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+  <div class="edit-btn"><svg viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="2" stroke-linejoin="round"><path d="M4 20h16M6 16l10-10 3 3-10 10H6z"/></svg></div>
+</div>
+<div class="handle" contenteditable>@givaldozavale</div>
+
+<div class="stats">
+  <div class="stat"><b contenteditable>4</b><small>A seguir</small></div>
+  <div class="stat"><b contenteditable>1,454</b><small>Seguidores</small></div>
+  <div class="stat"><b contenteditable>1,224</b><small>Gostos</small></div>
+</div>
+
+<div class="bio" contenteditable>Escreva aqui a sua biografia</div>
+<div class="link">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="2.2" stroke-linecap="round"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>
+  <span contenteditable>seu-link-aqui</span>
+</div>
+
+<div class="tabs">
+  <div class="tab active"><svg viewBox="0 0 30 24" fill="#161823"><rect x="2" y="3" width="2.4" height="5" rx="1"/><rect x="8" y="3" width="2.4" height="5" rx="1"/><rect x="14" y="3" width="2.4" height="5" rx="1"/><rect x="2" y="11" width="2.4" height="10" rx="1"/><rect x="8" y="11" width="2.4" height="10" rx="1"/><rect x="14" y="11" width="2.4" height="10" rx="1"/><path d="M20 10h8l-4 5z"/></svg></div>
+  <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="#8a8b91" stroke-width="2"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+  <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="#8a8b91" stroke-width="2" stroke-linejoin="round"><path d="M6 3h12v18l-6-5-6 5z"/></svg></div>
+  <div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="#8a8b91" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-8-5-8-11a4.5 4.5 0 0 1 8-2.8A4.5 4.5 0 0 1 20 9c0 6-8 11-8 11z"/></svg></div>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="nav">
+  <div class="it"><svg viewBox="0 0 24 24" fill="none" stroke="#8a8b91" stroke-width="1.8" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5V21h-6v-6H9v6H3z"/></svg>Início</div>
+  <div class="it"><span class="dot"></span><svg viewBox="0 0 24 24" fill="none" stroke="#8a8b91" stroke-width="1.8"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5"/><circle cx="17" cy="9" r="2.6"/><path d="M17 14c2.8 0 4.5 2.2 4.5 5"/></svg>Amigos</div>
+  <div class="it"><div class="create"><div><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><path d="M12 4v16M4 12h16"/></svg></div></div></div>
+  <div class="it"><span class="badge" contenteditable>99+</span><svg viewBox="0 0 24 24" fill="none" stroke="#8a8b91" stroke-width="1.8" stroke-linejoin="round"><path d="M4 4h16v13h-5l-3 3-3-3H4z"/><path d="M8 9h8M8 12.5h5" stroke-linecap="round"/></svg>C. de entrada</div>
+  <div class="it on"><svg viewBox="0 0 24 24" fill="#161823"><circle cx="12" cy="7.5" r="4.5"/><path d="M3 21c0-5 4-8 9-8s9 3 9 8z"/></svg>Perfil</div>
+</div>
+
+<!-- Menu lateral -->
+<div class="overlay" id="overlay"></div>
+<div class="drawer">
+  <div class="sec">Ativos</div>
+
+  <div class="row">
+    <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="2" stroke-linejoin="round"><path d="M3 7h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 7l12-3v3"/><circle cx="16.5" cy="13.5" r="1" fill="#161823"/></svg>
+    <span class="tx">Saldo</span>
+    <svg class="ch" viewBox="0 0 24 24" fill="none" stroke="#8a8b91" stroke-width="2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>
+  </div>
+
+  <!-- NOVA OPÇÃO: CONTA VERIFICADA -->
+  <div class="row" onclick="window.location.href='https://www.tiktok.com/download'">
+    <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="9"/>
+      <path d="M8 12l2.5 2.5L16 9"/>
+    </svg>
+    <span class="tx">Conta verificada</span>
+    <svg class="ch" viewBox="0 0 24 24" fill="none" stroke="#8a8b91" stroke-width="2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>
+  </div>
+
+  <div class="sep"></div>
+
+  <div class="sec">Ferramentas pessoais</div>
+  <div class="row">
+    <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+    <span class="tx">Centro de atividade</span>
+    <svg class="ch" viewBox="0 0 24 24" fill="none" stroke="#8a8b91" stroke-width="2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>
+  </div>
+  <div class="row">
+    <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 19a5 5 0 0 1-.6-10A6 6 0 0 1 18 9a4.5 4.5 0 0 1-1 10z"/><path d="M12 10v6M9.5 13.5L12 16l2.5-2.5"/></svg>
+    <span class="tx">Vídeos offline</span>
+    <svg class="ch" viewBox="0 0 24 24" fill="none" stroke="#8a8b91" stroke-width="2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>
+  </div>
+  <div class="row">
+    <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3h-3zM18 18h3v3h-3zM18 14h3M14 18v3" stroke-linecap="round"/></svg>
+    <span class="tx">O teu código QR</span>
+    <svg class="ch" viewBox="0 0 24 24" fill="none" stroke="#8a8b91" stroke-width="2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>
+  </div>
+  <div class="sep"></div>
+
+  <div class="sec">Ferramentas comerciais e de criação</div>
+  <div class="row">
+    <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="7.5" r="4"/><path d="M2 21c0-4 3-7 7-7 1.5 0 2.8.4 3.9 1"/><path d="M18 13l1.2 2.5 2.8.4-2 2 .5 2.8-2.5-1.3-2.5 1.3.5-2.8-2-2 2.8-.4z" fill="#161823" stroke="none"/></svg>
+    <span class="tx">TikTok Studio</span>
+    <svg class="ch" viewBox="0 0 24 24" fill="none" stroke="#8a8b91" stroke-width="2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>
+  </div>
+  <div class="sep"></div>
+
+  <div class="row">
+    <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="#161823" stroke-width="2" stroke-linejoin="round"><path d="M12 2.5l2.4 1.4 2.8-.1 1.4 2.4 2.4 1.4-.1 2.8L22.3 13l-1.4 2.4.1 2.8-2.4 1.4-1.4 2.4-2.8-.1L12 23.3l-2.4-1.4-2.8.1-1.4-2.4-2.4-1.4.1-2.8L1.7 13l1.4-2.4-.1-2.8 2.4-1.4L6.8 4l2.8.1z" transform="scale(.92) translate(1 0)"/></svg>
+    <span class="tx">Definições e privacidade</span>
+    <svg class="ch" viewBox="0 0 24 24" fill="none" stroke="#8a8b91" stroke-width="2" stroke-linecap="round"><path d="M9 5l7 7-7 7"/></svg>
+  </div>
+</div>
+
+<div class="home-bar"></div>
+
+<script>
+  const views=["220","1,028","953","843","571","820","1,200","640","915"];
+  const grid=document.getElementById('grid');
+  const play='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round"><path d="M6 4l14 8-14 8z"/></svg>';
+
+  views.forEach(v=>{
+    const c=document.createElement('div');
+    c.className='cell';
+    c.innerHTML=`<div class="hint">+</div><input type="file" accept="image/*"><div class="views">${play}<span contenteditable>${v}</span></div>`;
+    const inp=c.querySelector('input');
+
+    c.addEventListener('click',e=>{
+      if(e.target.closest('.views')) return;
+      inp.click();
+    });
+
+    inp.addEventListener('change',()=>{
+      const f=inp.files[0];
+      if(!f) return;
+      const r=new FileReader();
+      r.onload=ev=>{
+        c.style.backgroundImage=`url(${ev.target.result})`;
+        c.classList.add('has');
+      };
+      r.readAsDataURL(f);
+    });
+
+    grid.appendChild(c);
+  });
+
+  function setBg(input,id){
+    const f=input.files[0];
+    if(!f) return;
+    const r=new FileReader();
+    r.onload=e=>document.getElementById(id).style.backgroundImage=`url(${e.target.result})`;
+    r.readAsDataURL(f);
+  }
+
+  document.getElementById('menuBtn').onclick=()=>{
+    document.body.classList.add('open');
+  };
+
+  document.getElementById('overlay').onclick=()=>{
+    document.body.classList.remove('open');
+  };
+</script>
+
+</body>
+  </html>
